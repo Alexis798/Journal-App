@@ -9,6 +9,11 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
         createValidators()
     }, [ formState ])
 
+    //Ya con este effect pasa de ser un input general a ser uno especializado para esta application
+    //ya que va a cambiar cuando las notas cambien
+    useEffect(() => {
+        setFormState( initialForm );
+    }, [ initialForm ])
 
     const isFormValid = useMemo( () => {
         

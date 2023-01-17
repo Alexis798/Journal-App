@@ -7,6 +7,12 @@ import { useForm } from '../../hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth/thunks'
 
+//Es necesario hacer esto ya que al agregar el useEffect para que se refresquen las notas si esto queda dentro del useForm se quedara disparando constantemente el useEffect
+const formData = {
+    email: '',
+    password: ''  
+}
+
 
 export const LoginPage = () => {
     //El sx es style pero te permite acceder a las propiedades que definiste con el AppTheme
@@ -15,10 +21,7 @@ export const LoginPage = () => {
     const { status, errorMessage } = useSelector( state => state.auth )
 
     const dispatch = useDispatch();
-    const { email, password, onInputChange } = useForm({
-        email: 'correo@google.com',
-        password: '123456'
-    });
+    const { email, password, onInputChange } = useForm(formData);
 
     const isAuthenticated = useMemo( () => status === 'checking', [status])
 
